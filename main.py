@@ -24,7 +24,7 @@ def get_number(number):
         return check_number(number)
 
 
-# what_api = 'https://wa.me/919988776655?text=How%20are%20you'
+# what_api = 'https://wa.me/923344278600?text=How%20are%20you'
 
 
 text = 'Atomated message from Amaan, Ignore this message'
