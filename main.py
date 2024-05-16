@@ -1,20 +1,32 @@
 from time import sleep
 import pyautogui
 
+# Three modules of Python designed
+## Validate phone numbers for WhatsApp API formatting
+## Correct incorrectly formatted numbers
+## Generate web links for automated WhatsApp messages
 
-def format_txt(message):
+def format_message(message):
     message = message.replace(' ', '%20')
     return message
 
 
 def check_number(number):
-    if len(number) != 12 or number[:3] != '923':
+    if len(number) >= 13 or len(number) < 10 or number[:3] != '923':
         return 'Number invalid'
     else:
         return number
 
 
-def get_number(number):
+def format_number(number):
+    # Strip whitespace
+    number = number.strip()
+
+    # Remove '+' if present
+    if number[:1] == "+":
+        number = number[1:]  
+
+
     if number[0] == "9" and number[1] == "2":
         return check_number(number)
     elif number[0] == '0':
@@ -29,16 +41,17 @@ def get_number(number):
 
 text = 'Atomated message from Amaan, Ignore this message'
 number = '03214278600'
+test_cases = ['0321 1234567', '3211234567', '+92 321 1234567', '92 1234567']
 
 
-def operate(numbe, mess):
+def operate(num, mess):
     try:
-        if int(get_number(numbe)) % 1 == 0:
+        if int(format_number(num)) % 1 == 0:
             txt = 'https://wa.me/{}?text={}'.format(
-                get_number(numbe), format_txt(mess))
+                format_number(num), format_message(mess))
             sleep(3)
             pyautogui.write(txt)
-            sleep(4)
+            sleep(1)
             pyautogui.hotkey('enter')
             sleep(1)
         else:
